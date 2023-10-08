@@ -2,9 +2,7 @@ resource "aws_lambda_function" "my_lambda" {
     function_name = var.function_name
     handler       = var.handler
     runtime       = var.runtime
-
     filename      = var.filename
-
     role          = var.iam_role_arn
 }
 

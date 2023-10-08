@@ -15,10 +15,17 @@ module "sqs" {
     message_retention_seconds = 345600 
 }
 
+module "cloudwatch_logs" {
+  source               = "./modules/cloudwatch_logs"
+  lambda_function_name = "Record_IoT_Data_Lambda"
+  retention_in_days    = 7
+}
+
 module "lambda_function" {
     source        = "./modules/lambda_function"
     function_name = "Record_IoT_Data_Lambda"
     filename      = "lambda_src/lambda_function.zip"
     iam_role_arn  = "arn:aws:iam::711704289087:role/IoT-AWS-Lambda"
     sqs_queue_arn = module.sqs.sqs_queue_arn
+    log_group_name = module.cloudwatch_logs.log_group_name
 }
