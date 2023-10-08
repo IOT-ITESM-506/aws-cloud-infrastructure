@@ -1,14 +1,22 @@
-variable "aws_region" {
-  description = "AWS region where resources will be created"
-  default     = "us-east-1"
+variable "queue_name" {
+    description = "The name of the SQS queue"
+    type        = string
+    default     = "MySQSQueue"
 }
 
-variable "sns_topic_name" {
-  description = "Name for the SNS topic"
-  default     = "MyIoTTopic"
+variable "delay_seconds" {
+    description = "The time in seconds for which a specific message will be delayed"
+    type        = number
+    default     = 5
 }
 
-variable "sqs_queue_name" {
-  description = "Name for the SQS queue"
-  default     = "MyIoTQueue"
+variable "message_retention_seconds" {
+    description = "The number of seconds to retain a message"
+    type        = number
+    default     = 345600
+}
+
+variable "sns_topic_arn" {
+    description = "The ARN of the SNS topic"
+    type        = string
 }
