@@ -42,7 +42,7 @@ resource "aws_security_group" "my_postgres_sg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["187.189.165.97/32"] # Ajusta a tu dirección IP real
+    cidr_blocks = ["187.189.165.97/32"]
   }
 
   tags = {
@@ -57,10 +57,10 @@ resource "aws_db_instance" "my_postgres" {
   engine_version       = "13.3"
   instance_class       = "db.t2.micro"
   username             = "postgresadmin"
-  password             = "yoursecurepassword" # Usa AWS Secrets Manager o variables de Terraform
+  password             = "yoursecurepassword"
   parameter_group_name = "default.postgres13"
   skip_final_snapshot  = true
-  db_name               = "mydbname" # Ajustado aquí
+  db_name               = "mydbname"
 
   db_subnet_group_name   = aws_db_subnet_group.my_postgres_subnet_group.name
   vpc_security_group_ids = [aws_security_group.my_postgres_sg.id]
