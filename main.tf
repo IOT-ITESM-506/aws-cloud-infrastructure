@@ -10,7 +10,15 @@ module "iot_core" {
 module "sqs" {
     source         = "./modules/sqs"
     sns_topic_arn  = module.sns.sns_topic_arn
-    queue_name     = "IoT_AWS_Queue" # Optional
-    delay_seconds  = 5                   # Optional
-    message_retention_seconds = 345600   # Optional
+    queue_name     = "IoT_AWS_Queue" 
+    delay_seconds  = 5                   
+    message_retention_seconds = 345600 
+}
+
+module "lambda_function" {
+    source        = "./modules/lambda_function"
+    function_name = "Record_IoT_Data_Lambda"
+    filename      = "lambda_src/lambda_function.zip"
+    iam_role_arn  = "arn:aws:iam::711704289087:role/IoT-AWS-Lambda"
+    sqs_queue_arn = module.sqs.sqs_queue_arn
 }
