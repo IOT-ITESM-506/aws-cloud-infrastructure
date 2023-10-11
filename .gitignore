@@ -1,6 +1,8 @@
 # Local .terraform directories
 **/.terraform/*
 
+.DS_Store
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
@@ -25,4 +27,3 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-.DS_Store

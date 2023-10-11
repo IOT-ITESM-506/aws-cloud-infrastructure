@@ -17,13 +17,13 @@ module "sqs" {
 
 module "cloudwatch_logs" {
   source               = "./modules/cloudwatch_logs"
-  lambda_function_name = "Record_IoT_Data_Lambda"
+  lambda_function_name = "record_iot_data_lambda"
   retention_in_days    = 7
 }
 
 module "lambda_function" {
     source        = "./modules/lambda_function"
-    function_name = "Record_IoT_Data_Lambda"
+    function_name = "record_iot_data_lambda"
     filename      = "lambda_src/lambda_function.zip"
     iam_role_arn  = "arn:aws:iam::711704289087:role/IoT-AWS-Lambda"
     sqs_queue_arn = module.sqs.sqs_queue_arn
