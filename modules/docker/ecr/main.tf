@@ -6,8 +6,27 @@ data "aws_iam_policy_document" "ecr_policy" {
   version = "2012-10-17"
 
   statement {
-    actions   = ["ecr:GetAuthorizationToken", "ecr:BatchCheckLayerAvailability", "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage", "ecr:InitiateLayerUpload", "ecr:UploadLayerPart", "ecr:CompleteLayerUpload", "ecr:PutImage"]
+    actions   = [
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload",
+      "ecr:PutImage",
+      "ecr:ListImages",  # Permiso adicional para listar imágenes
+    ]
     resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:DescribeImages",  # Permiso adicional para describir imágenes
+    ]
+    resources = [aws_ecr_repository.django_app_repo.arn]
   }
 }
 
@@ -42,5 +61,5 @@ resource "aws_iam_role_policy_attachment" "ecr_attachment" {
 }
 
 resource "aws_ecr_repository" "django_app_repo" {
-  name = var.ecr_repository_name
+  name = var.repository_name
 }
