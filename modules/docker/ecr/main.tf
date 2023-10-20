@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "ecr_policy" {
       "ecr:UploadLayerPart",
       "ecr:CompleteLayerUpload",
       "ecr:PutImage",
-      "ecr:ListImages",  # Permiso adicional para listar imágenes
+      "ecr:ListImages",  
     ]
     resources = ["*"]
   }
@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "ecr_policy" {
     actions = [
       "ecr:BatchCheckLayerAvailability",
       "ecr:BatchGetImage",
-      "ecr:DescribeImages",  # Permiso adicional para describir imágenes
+      "ecr:DescribeImages",
     ]
     resources = [aws_ecr_repository.django_app_repo.arn]
   }
