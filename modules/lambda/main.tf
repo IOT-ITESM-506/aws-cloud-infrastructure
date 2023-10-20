@@ -47,7 +47,7 @@ resource "aws_iam_policy" "sqs_lambda_policy" {
           "sqs:GetQueueAttributes",
         ],
         Effect   = "Allow",
-        Resource = var.sqs_queue_arn,  # Usa el parámetro en lugar de module.sqs.sqs_queue_arn
+        Resource = var.sqs_queue_arn,
       },
     ],
   })
@@ -59,6 +59,6 @@ resource "aws_iam_role_policy_attachment" "sqs_lambda_policy_attachment" {
 }
 
 resource "aws_lambda_event_source_mapping" "sqs_event_mapping" {
-  event_source_arn = var.sqs_queue_arn  # Usa el parámetro en lugar de module.sqs.sqs_queue_arn
+  event_source_arn = var.sqs_queue_arn
   function_name    = aws_lambda_function.my_lambda_function.arn
 }

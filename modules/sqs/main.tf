@@ -25,7 +25,6 @@ resource "aws_sqs_queue_policy" "sqs_policy" {
 }
 
 
-# Outputs para que el ARN de la cola SQS esté disponible para otros módulos
 output "sqs_queue_arn" {
   value = aws_sqs_queue.my_queue.arn
 }

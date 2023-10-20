@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"  # Cambia esto a tu región deseada
+  region = "us-east-1"  
 }
 
 variable "db_name" {
@@ -27,8 +27,6 @@ resource "aws_db_instance" "database" {
   username             = var.db_username
   password             = var.db_password
   publicly_accessible  = true
-
-  # Puedes agregar más configuración según tus necesidades
 }
 
 output "db_endpoint" {
