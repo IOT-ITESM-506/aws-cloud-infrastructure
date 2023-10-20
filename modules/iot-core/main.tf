@@ -46,8 +46,8 @@ resource "aws_iot_policy_attachment" "esp8266_policy_attach" {
 }
 
 resource "aws_iam_role" "iot_sns_role" {
-    name = "IOT_SNS_Role_v2"
-
+    name = "iot_sns_role"
+    
     assume_role_policy = jsonencode({
         Version = "2012-10-17",
         Statement = [

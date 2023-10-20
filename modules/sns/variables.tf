@@ -1,5 +1,9 @@
 variable "sns_topic_name" {
-    description = "Name of the SNS topic"
-    type        = string
-    default     = "my-iot-sns-topic"
+  type        = string
+  description = "Name for the SNS topic"
+}
+
+variable "sqs_queue_arn" {
+  type        = string
+  description = "ARN of the SQS queue to subscribe to"
 }
