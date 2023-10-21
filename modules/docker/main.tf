@@ -13,10 +13,10 @@ module "ecs_module" {
   cluster_name       = "your-ecs-cluster"
   task_family        = "your-task-family"
   container_name     = "your-container"
-  container_port     = 80  # Cambia al puerto correcto
-  host_port          = 8080  # Cambia al puerto correcto
-  memory             = 512  # Cambia según tus requisitos
-  cpu                = 256  # Cambia según tus requisitos
+  container_port     = 80  
+  host_port          = 8080  
+  memory             = 512  
+  cpu                = 256
   service_name       = "your-ecs-service"
   subnets            = ["subnet-xxxxxx", "subnet-yyyyyy"] 
   security_groups    = ["sg-xxxxxx"] 
