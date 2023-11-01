@@ -14,7 +14,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                 = "education"
+  name                 = "iot"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
@@ -22,17 +22,17 @@ module "vpc" {
   enable_dns_support   = true
 }
 
-resource "aws_db_subnet_group" "education" {
-  name       = "education-${random_string.unique_suffix.result}"
+resource "aws_db_subnet_group" "iot" {
+  name       = "iot-${random_string.unique_suffix.result}"
   subnet_ids = module.vpc.public_subnets
 
   tags = {
-    Name = "Education"
+    Name = "IoT"
   }
 }
 
 resource "aws_security_group" "rds" {
-  name   = "education_rds"
+  name   = "iot_rds"
   vpc_id = module.vpc.vpc_id
 
   ingress {
@@ -50,12 +50,12 @@ resource "aws_security_group" "rds" {
   }
 
   tags = {
-    Name = "education_rds"
+    Name = "iot_rds"
   }
 }
 
-resource "aws_db_parameter_group" "education" {
-  name   = "education-${random_string.unique_suffix.result}"
+resource "aws_db_parameter_group" "iot" {
+  name   = "iot-${random_string.unique_suffix.result}"
   family = "postgres15"
 
   parameter {
@@ -64,17 +64,17 @@ resource "aws_db_parameter_group" "education" {
   }
 }
 
-resource "aws_db_instance" "education" {
-  identifier             = "education"
+resource "aws_db_instance" "iot" {
+  identifier             = "iot"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
   engine_version         = "15.3"
   username               = "edu"
   password               = var.db_password
-  db_subnet_group_name   = aws_db_subnet_group.education.name
+  db_subnet_group_name   = aws_db_subnet_group.iot.name
   vpc_security_group_ids = [aws_security_group.rds.id]
-  parameter_group_name   = aws_db_parameter_group.education.name
+  parameter_group_name   = aws_db_parameter_group.iot.name
   publicly_accessible    = true
   skip_final_snapshot    = true
 }
